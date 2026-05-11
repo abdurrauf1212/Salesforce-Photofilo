@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abdur Rauf – Salesforce Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#0a0f1e;color:#e8eaf0;min-height:100vh}
+a{color:#93c5fd;text-decoration:none}
+a:hover{color:#60a5fa}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0a0f1e 0%,#0f1a35 50%,#0a0f1e 100%);padding:70px 40px 55px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(99,179,237,0.15)}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:350px;background:radial-gradient(ellipse,rgba(59,130,246,0.13) 0%,transparent 70%);pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.3);border-radius:20px;padding:5px 14px;font-size:12px;color:#93c5fd;letter-spacing:0.05em;margin-bottom:22px}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:#3b82f6;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.name{font-family:'DM Serif Display',serif;font-size:52px;color:#fff;line-height:1.1;margin-bottom:10px}
+.name span{color:#3b82f6;font-style:italic}
+.subtitle{font-size:16px;color:#94a3b8;margin-bottom:8px}
+.cert-row{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.cert-item{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#fbbf24}
+.contacts{display:flex;justify-content:center;flex-wrap:wrap;gap:18px}
+.contact-item{display:flex;align-items:center;gap:6px;font-size:13px;color:#64748b}
+.contact-item i{color:#3b82f6;font-size:15px}
+
+/* SECTIONS */
+section{padding:44px 44px 24px;max-width:900px;margin:0 auto}
+.sec-title{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.sec-title::after{content:'';flex:1;height:1px;background:rgba(99,179,237,0.15)}
+
+/* SUMMARY */
+.summary-text{font-size:14.5px;line-height:1.85;color:#94a3b8}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.skill-card{background:rgba(255,255,255,0.03);border:1px solid rgba(99,179,237,0.1);border-radius:10px;padding:14px 16px;transition:border-color 0.25s,transform 0.2s}
+.skill-card:hover{border-color:rgba(59,130,246,0.35);transform:translateY(-2px)}
+.skill-label{font-size:11px;color:#3b82f6;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;font-weight:600}
+.skill-value{font-size:13px;color:#cbd5e1;line-height:1.55}
+
+/* EXPERIENCE */
+.exp-list{display:flex;flex-direction:column;gap:16px}
+.exp-card{background:rgba(255,255,255,0.03);border:1px solid rgba(99,179,237,0.1);border-radius:12px;padding:22px 24px;transition:border-color 0.25s,transform 0.2s}
+.exp-card:hover{border-color:rgba(59,130,246,0.25);transform:translateY(-2px)}
+.exp-card.current{border-left:3px solid #3b82f6}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;flex-wrap:wrap;gap:8px}
+.exp-title{font-size:15px;font-weight:600;color:#e2e8f0}
+.exp-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.exp-company{font-size:13px;color:#64748b;margin-bottom:12px;display:flex;align-items:center;gap:5px}
+.tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500}
+.tag-blue{background:rgba(59,130,246,0.12);color:#93c5fd;border:1px solid rgba(59,130,246,0.2)}
+.tag-green{background:rgba(34,197,94,0.1);color:#86efac;border:1px solid rgba(34,197,94,0.2)}
+.tag-amber{background:rgba(251,191,36,0.1);color:#fcd34d;border:1px solid rgba(251,191,36,0.2)}
+.date-tag{font-size:11px;color:#475569;background:rgba(255,255,255,0.05);border-radius:20px;padding:3px 10px;border:1px solid rgba(255,255,255,0.08)}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:5px}
+.exp-bullets li{font-size:13px;color:#94a3b8;padding-left:16px;position:relative;line-height:1.65}
+.exp-bullets li::before{content:'›';position:absolute;left:0;color:#3b82f6;font-weight:700;font-size:15px}
+
+/* EDUCATION */
+.edu-card{background:rgba(255,255,255,0.03);border:1px solid rgba(99,179,237,0.1);border-radius:12px;padding:22px 24px;display:flex;align-items:center;gap:18px}
+.edu-icon{width:48px;height:48px;border-radius:12px;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);display:flex;align-items:center;justify-content:center;color:#3b82f6;font-size:22px;flex-shrink:0}
+.edu-title{font-size:15px;font-weight:500;color:#e2e8f0;margin-bottom:4px}
+.edu-sub{font-size:13px;color:#64748b}
+
+/* CERTIFICATIONS */
+.cert-grid{display:flex;flex-wrap:wrap;gap:12px;padding:0 44px 44px;max-width:900px;margin:0 auto}
+.cert-badge{display:flex;align-items:center;gap:10px;background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.2);border-radius:10px;padding:12px 18px;transition:background 0.2s}
+.cert-badge:hover{background:rgba(251,191,36,0.12)}
+.cert-badge i{color:#fbbf24;font-size:20px}
+.cert-badge span{font-size:13px;color:#fcd34d;font-weight:500}
+
+/* FOOTER */
+.footer{text-align:center;padding:24px 40px 44px;font-size:12px;color:#334155;border-top:1px solid rgba(99,179,237,0.08);margin-top:20px}
+
+@media(max-width:600px){
+  .name{font-size:36px}
+  section{padding:32px 20px 16px}
+  .cert-grid{padding:0 20px 32px}
+  .hero{padding:50px 20px 40px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge"><span class="badge-dot"></span>Open to opportunities</div>
+  <h1 class="name">Abdur <span>Rauf</span></h1>
+  <p class="subtitle">Salesforce Developer &amp; Frontend Developer</p>
+  <div class="cert-row">
+    <span class="cert-item"><i class="ti ti-rosette"></i> Salesforce Certified Administrator</span>
+    <span class="cert-item"><i class="ti ti-rosette"></i> Agentforce Specialist</span>
+  </div>
+  <div class="contacts">
+    <span class="contact-item"><i class="ti ti-map-pin"></i> Islamabad, Pakistan</span>
+    <span class="contact-item"><i class="ti ti-phone"></i> +92 343 9050858</span>
+    <span class="contact-item"><i class="ti ti-mail"></i> <a href="mailto:rauf01463@gmail.com">rauf01463@gmail.com</a></span>
+    <span class="contact-item"><i class="ti ti-external-link"></i> <a href="https://www.salesforce.com/trailblazer/kz0tadnyqtdatsm8bk" target="_blank">Trailblazer Profile</a></span>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<section>
+  <h2 class="sec-title"><i class="ti ti-user" style="color:#3b82f6"></i> Summary</h2>
+  <p class="summary-text">Salesforce Certified Administrator and Developer with 1+ year of experience in customization, automation, security management, and reporting. Proficient in Apex, Triggers, Lightning Web Components (LWC), and basic REST integrations. Experienced in Sales Cloud, Service Cloud, and Flow Builder. Also skilled in frontend development using HTML, CSS, and JavaScript. Strong problem-solving ability with a focus on system efficiency and user experience.</p>
+</section>
+
+<!-- SKILLS -->
+<section>
+  <h2 class="sec-title"><i class="ti ti-code" style="color:#3b82f6"></i> Technical skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card"><div class="skill-label">Salesforce clouds</div><div class="skill-value">Sales Cloud, Service Cloud, Experience Cloud</div></div>
+    <div class="skill-card"><div class="skill-label">Apex</div><div class="skill-value">Classes, Triggers, Batch Apex, Test Classes</div></div>
+    <div class="skill-card"><div class="skill-label">Automation</div><div class="skill-value">Flow Builder, Process Builder, Workflow Rules</div></div>
+    <div class="skill-card"><div class="skill-label">LWC / Aura</div><div class="skill-value">Components, Wire Service, Apex from LWC, Events</div></div>
+    <div class="skill-card"><div class="skill-label">Security</div><div class="skill-value">Roles, Profiles, Permission Sets, OWD, Sharing Rules, FLS</div></div>
+    <div class="skill-card"><div class="skill-label">Integration</div><div class="skill-value">REST API, HTTP Callouts, Named Credentials</div></div>
+    <div class="skill-card"><div class="skill-label">Data</div><div class="skill-value">Data Loader, Import Wizard, Duplicate Rules, SOQL, SOSL</div></div>
+    <div class="skill-card"><div class="skill-label">Frontend</div><div class="skill-value">HTML5, CSS3, JavaScript (ES6+), React</div></div>
+    <div class="skill-card"><div class="skill-label">Tools</div><div class="skill-value">VS Code, GitHub, SQL, Data Loader.io</div></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section>
+  <h2 class="sec-title"><i class="ti ti-briefcase" style="color:#3b82f6"></i> Experience</h2>
+  <div class="exp-list">
+
+    <div class="exp-card current">
+      <div class="exp-header">
+        <span class="exp-title">Junior Salesforce Administrator</span>
+        <div class="exp-meta">
+          <span class="tag tag-green">Onsite</span>
+          <span class="date-tag">Oct 2025 – Jan 2026</span>
+        </div>
+      </div>
+      <p class="exp-company"><i class="ti ti-building"></i> Xavor, Lahore</p>
+      <ul class="exp-bullets">
+        <li>Implemented Salesforce automation solutions using Flow Builder and Apex Triggers</li>
+        <li>Developed Lightning Web Components (LWC) to enhance user interface and experience</li>
+        <li>Managed user roles, profiles, permission sets, and security configurations</li>
+        <li>Built summary and matrix reports with dashboards for KPI tracking</li>
+        <li>Configured standard and custom objects, record types, page layouts, and Lightning App Builder</li>
+        <li>Set up OWD, sharing rules, and field-level security to ensure proper data access control</li>
+        <li>Handled user onboarding, password resets, and license management</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-title">Salesforce Administrator Intern</span>
+        <div class="exp-meta">
+          <span class="tag tag-blue">Remote</span>
+          <span class="date-tag">Jun 2025 – Sep 2025</span>
+        </div>
+      </div>
+      <p class="exp-company"><i class="ti ti-building"></i> NawLabs</p>
+      <ul class="exp-bullets">
+        <li>Supported daily admin tasks including user management and object configuration</li>
+        <li>Created automation flows and custom dashboards for business insight reporting</li>
+        <li>Assisted in data migration and Lightning App Builder customization</li>
+        <li>Wrote basic Apex classes and SOQL queries for data processing</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-title">Salesforce Administrator – Freelance</span>
+        <div class="exp-meta">
+          <span class="tag tag-amber">Remote</span>
+          <span class="date-tag">Dec 2023 – Present</span>
+        </div>
+      </div>
+      <p class="exp-company"><i class="ti ti-world"></i> Fiverr (Global Clients)</p>
+      <ul class="exp-bullets">
+        <li>Delivered end-to-end Salesforce solutions including automation, security, and customization</li>
+        <li>Developed Apex classes and triggers for business logic and data validation</li>
+        <li>Built LWC components and integrated third-party services via REST API</li>
+        <li>Performed data migration, system optimization, and org health maintenance</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-title">Web Developer</span>
+        <div class="exp-meta">
+          <span class="tag tag-green">Onsite</span>
+          <span class="date-tag">Sep 2021 – Jan 2022</span>
+        </div>
+      </div>
+      <p class="exp-company"><i class="ti ti-building"></i> WebSolute IT Solution</p>
+      <ul class="exp-bullets">
+        <li>Developed responsive and dynamic websites using HTML5, CSS3, and JavaScript</li>
+        <li>Maintained and updated front-end systems ensuring cross-browser compatibility</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section>
+  <h2 class="sec-title"><i class="ti ti-school" style="color:#3b82f6"></i> Education</h2>
+  <div class="edu-card">
+    <div class="edu-icon"><i class="ti ti-school"></i></div>
+    <div>
+      <p class="edu-title">Bachelor of Science in Software Engineering</p>
+      <p class="edu-sub">Abdul Wali Khan University Mardan &nbsp;·&nbsp; 2021 – 2025</p>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section style="padding-bottom:12px">
+  <h2 class="sec-title"><i class="ti ti-certificate" style="color:#3b82f6"></i> Certifications</h2>
+</section>
+<div class="cert-grid">
+  <div class="cert-badge"><i class="ti ti-rosette"></i><span>Salesforce Certified Administrator</span></div>
+  <div class="cert-badge"><i class="ti ti-rosette"></i><span>Salesforce Certified Agentforce Specialist</span></div>
+  <div class="cert-badge"><i class="ti ti-award"></i><span>Trailhead Ranger</span></div>
+  <div class="cert-badge"><i class="ti ti-star"></i><span>Trailhead Super Badges 3+</span></div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  rauf01463@gmail.com &nbsp;·&nbsp; +92 343 9050858 &nbsp;·&nbsp; Islamabad, Pakistan
+</div>
+
+</body>
+</html>
