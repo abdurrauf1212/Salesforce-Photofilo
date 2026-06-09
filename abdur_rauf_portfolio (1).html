@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abdur Rauf — Salesforce Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#0a0a0f;
+    --surface:#111118;
+    --card:#16161f;
+    --border:#1e1e2e;
+    --border2:#2a2a3e;
+    --txt:#e8e8f0;
+    --txt2:#8888aa;
+    --txt3:#5a5a7a;
+    --accent:#00d4ff;
+    --accent2:#7c3aed;
+    --accent3:#06d6a0;
+    --accentdim:rgba(0,212,255,0.08);
+    --accentdim2:rgba(124,58,237,0.08);
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;line-height:1.7;font-size:15px}
+  a{color:inherit;text-decoration:none}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 5%}
+  .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+  .nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.5px}
+  .nav-logo span{color:var(--accent)}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{font-size:13px;color:var(--txt2);transition:color .2s}
+  .nav-links a:hover{color:var(--txt)}
+  .nav-cta{background:var(--accent);color:#000;font-size:13px;font-weight:600;padding:8px 18px;border-radius:6px;transition:opacity .2s}
+  .nav-cta:hover{opacity:.85}
+
+  /* SECTIONS */
+  section{padding:90px 5%}
+  .container{max-width:1100px;margin:0 auto}
+  .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-weight:500}
+  h2.section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,4vw,42px);font-weight:700;line-height:1.15;margin-bottom:1.5rem;letter-spacing:-0.5px}
+
+  /* HERO */
+  #home{min-height:100vh;display:flex;align-items:center;padding-top:100px;position:relative;overflow:hidden}
+  #home::before{content:'';position:absolute;top:10%;right:-10%;width:600px;height:600px;background:radial-gradient(ellipse,rgba(0,212,255,0.04) 0%,transparent 70%);pointer-events:none}
+  #home::after{content:'';position:absolute;bottom:10%;left:-10%;width:400px;height:400px;background:radial-gradient(ellipse,rgba(124,58,237,0.05) 0%,transparent 70%);pointer-events:none}
+  .hero-grid{display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:center}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--accentdim);border:1px solid rgba(0,212,255,0.2);color:var(--accent);font-size:12px;font-weight:500;padding:6px 14px;border-radius:100px;margin-bottom:1.5rem}
+  .hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  h1.hero-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(38px,5vw,62px);font-weight:700;line-height:1.08;letter-spacing:-1.5px;margin-bottom:1rem}
+  h1.hero-title em{color:var(--accent);font-style:normal}
+  .hero-sub{font-size:16px;color:var(--txt2);line-height:1.7;max-width:480px;margin-bottom:2rem}
+  .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn-primary{background:var(--accent);color:#000;font-weight:600;font-size:14px;padding:12px 24px;border-radius:8px;transition:opacity .2s}
+  .btn-primary:hover{opacity:.85}
+  .btn-ghost{background:transparent;color:var(--txt);font-weight:500;font-size:14px;padding:12px 24px;border-radius:8px;border:1px solid var(--border2);transition:border-color .2s,color .2s}
+  .btn-ghost:hover{border-color:var(--txt3);color:var(--txt)}
+  .hero-stats{display:flex;gap:2rem;margin-top:2.5rem;padding-top:2.5rem;border-top:1px solid var(--border)}
+  .stat-num{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--txt);line-height:1}
+  .stat-label{font-size:12px;color:var(--txt2);margin-top:4px}
+  .hero-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative}
+  .hero-card::before{content:'';position:absolute;inset:-1px;border-radius:16px;background:linear-gradient(135deg,rgba(0,212,255,0.15),transparent 50%,rgba(124,58,237,0.1));pointer-events:none;z-index:-1}
+  .profile-initials{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:#fff;margin-bottom:16px}
+  .hero-card h3{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:4px}
+  .hero-card p{font-size:13px;color:var(--txt2);margin-bottom:16px}
+  .card-divider{height:1px;background:var(--border);margin:16px 0}
+  .card-info-row{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--txt2);margin-bottom:8px}
+  .card-info-row svg{flex-shrink:0;opacity:.6}
+  .card-info-row span{color:var(--txt)}
+  .cert-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(6,214,160,0.1);border:1px solid rgba(6,214,160,0.25);color:var(--accent3);font-size:11px;font-weight:600;padding:4px 10px;border-radius:100px;margin-top:8px}
+
+  /* ABOUT */
+  #about{background:var(--surface)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+  .about-text{font-size:15px;color:var(--txt2);line-height:1.8}
+  .about-text p{margin-bottom:1rem}
+  .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .skill-bar-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+  .skill-bar-label{display:flex;justify-content:space-between;font-size:13px;font-weight:500;margin-bottom:8px}
+  .skill-bar-label span:last-child{color:var(--txt2)}
+  .skill-bar-track{height:4px;background:var(--border2);border-radius:100px;overflow:hidden}
+  .skill-bar-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+
+  /* EXPERIENCE */
+  #experience{}
+  .exp-grid{display:grid;grid-template-columns:240px 1fr;gap:3rem}
+  .exp-timeline{position:relative}
+  .exp-tab{padding:12px 16px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:500;color:var(--txt2);border:1px solid transparent;transition:all .2s;margin-bottom:4px;border-left:2px solid transparent}
+  .exp-tab:hover{color:var(--txt);background:var(--surface)}
+  .exp-tab.active{color:var(--accent);background:var(--accentdim);border-left-color:var(--accent)}
+  .exp-panel{display:none}
+  .exp-panel.active{display:block}
+  .exp-company{font-size:12px;color:var(--accent);font-weight:500;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+  .exp-role{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;margin-bottom:4px}
+  .exp-period{font-size:13px;color:var(--txt2);margin-bottom:1.5rem;display:flex;align-items:center;gap:6px}
+  .exp-period::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent3)}
+  .exp-bullets{list-style:none;color:var(--txt2);font-size:14px;line-height:1.8}
+  .exp-bullets li{padding:6px 0;padding-left:20px;position:relative}
+  .exp-bullets li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:12px;top:8px}
+
+  /* SERVICES */
+  #services{background:var(--surface)}
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .service-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px;transition:border-color .2s,transform .2s}
+  .service-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+  .service-icon{width:44px;height:44px;border-radius:10px;background:var(--accentdim);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:22px}
+  .service-card h3{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:600;margin-bottom:8px}
+  .service-card p{font-size:13px;color:var(--txt2);line-height:1.7}
+  .service-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+  .tag{font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;background:var(--surface);border:1px solid var(--border);color:var(--txt2)}
+
+  /* PROJECTS */
+  #projects{}
+  .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .project-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px;transition:border-color .2s}
+  .project-card:hover{border-color:var(--border2)}
+  .project-type{font-size:11px;color:var(--accent2);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+  .project-card h3{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;margin-bottom:8px}
+  .project-card p{font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:16px}
+
+  /* CONTACT */
+  #contact{background:var(--surface)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+  .contact-info h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,3vw,38px);font-weight:700;letter-spacing:-0.5px;margin-bottom:1rem}
+  .contact-info p{color:var(--txt2);font-size:15px;line-height:1.8;margin-bottom:2rem}
+  .contact-links{display:flex;flex-direction:column;gap:12px}
+  .contact-link{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-size:14px;transition:border-color .2s}
+  .contact-link:hover{border-color:var(--border2)}
+  .contact-link-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .contact-link-icon.phone{background:rgba(0,212,255,0.1);color:var(--accent)}
+  .contact-link-icon.email{background:rgba(124,58,237,0.1);color:var(--accent2)}
+  .contact-link-icon.loc{background:rgba(6,214,160,0.1);color:var(--accent3)}
+  .contact-link-text{color:var(--txt2);font-size:12px;margin-bottom:1px}
+  .contact-link-val{color:var(--txt);font-size:14px;font-weight:500}
+  form{display:flex;flex-direction:column;gap:14px}
+  form input,form textarea{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:var(--txt);font-size:14px;font-family:inherit;outline:none;transition:border-color .2s}
+  form input:focus,form textarea:focus{border-color:var(--accent)}
+  form input::placeholder,form textarea::placeholder{color:var(--txt3)}
+  form textarea{resize:vertical;min-height:120px}
+  form button{background:var(--accent);color:#000;font-weight:600;font-size:14px;padding:12px 24px;border-radius:8px;border:none;cursor:pointer;transition:opacity .2s;font-family:inherit}
+  form button:hover{opacity:.85}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);padding:30px 5%;text-align:center;font-size:13px;color:var(--txt3)}
+  footer span{color:var(--accent)}
+
+  @media(max-width:900px){
+    .hero-grid,.about-grid,.exp-grid,.contact-grid{grid-template-columns:1fr}
+    .services-grid{grid-template-columns:1fr 1fr}
+    .projects-grid{grid-template-columns:1fr}
+    .hero-stats{gap:1.5rem}
+    .skills-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:600px){
+    .nav-links{display:none}
+    .services-grid{grid-template-columns:1fr}
+    .hero-stats{flex-wrap:wrap}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">AR<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:rauf01463@gmail.com" class="nav-cta">Hire Me</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">Available for work</div>
+        <h1 class="hero-title">Salesforce<br>Developer &<br><em>Frontend</em> Dev</h1>
+        <p class="hero-sub">Certified Salesforce Administrator with 1+ year of experience building automations, LWC components, and scalable CRM solutions for global clients.</p>
+        <div class="hero-btns">
+          <a href="#contact" class="btn-primary">Get in Touch</a>
+          <a href="#projects" class="btn-ghost">View My Work</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">1+</div>
+            <div class="stat-label">Years experience</div>
+          </div>
+          <div>
+            <div class="stat-num">30+</div>
+            <div class="stat-label">Projects delivered</div>
+          </div>
+          <div>
+            <div class="stat-num">1</div>
+            <div class="stat-label">SF Certification</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="hero-card">
+          <div class="profile-initials">AR</div>
+          <h3>Abdur Rauf</h3>
+          <p>Salesforce Developer & Frontend Dev</p>
+          <div class="card-divider"></div>
+          <div class="card-info-row">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>Islamabad, Pakistan</span>
+          </div>
+          <div class="card-info-row">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>rauf01463@gmail.com</span>
+          </div>
+          <div class="card-info-row">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <span>+92 343 9050858</span>
+          </div>
+          <div class="card-divider"></div>
+          <div class="card-info-row">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+            <span>BS Software Engineering · AWKUM · 2025</span>
+          </div>
+          <div class="cert-badge">
+            ✓ Salesforce Certified Administrator
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">About me</div>
+        <h2 class="section-title">Building smart Salesforce solutions</h2>
+        <div class="about-text">
+          <p>I'm a Salesforce Certified Administrator and Developer based in Islamabad, Pakistan, with hands-on experience delivering end-to-end CRM solutions for businesses worldwide via Fiverr and full-time roles.</p>
+          <p>My work spans Apex development, Lightning Web Components, Flow automation, and REST integrations — with a focus on clean architecture and great user experience. I also build responsive frontends with HTML, CSS, and JavaScript.</p>
+          <p>I graduated with a BS in Software Engineering from Abdul Wali Khan University Mardan in 2025 and hold a Salesforce Administrator certification.</p>
+        </div>
+      </div>
+      <div>
+        <div class="section-label" style="margin-bottom:20px">Core skills</div>
+        <div class="skills-grid">
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span>Salesforce Admin</span><span>90%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span>Flow Builder</span><span>85%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span>Apex / Triggers</span><span>75%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span>LWC / Aura</span><span>72%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:72%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span>REST Integration</span><span>65%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:65%"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-label"><span>HTML / CSS / JS</span><span>80%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Career</div>
+    <h2 class="section-title">Work experience</h2>
+    <div class="exp-grid">
+      <div class="exp-timeline">
+        <div class="exp-tab active" onclick="showExp('xavor',this)">Xavor</div>
+        <div class="exp-tab" onclick="showExp('nawlabs',this)">NawLabs</div>
+        <div class="exp-tab" onclick="showExp('fiverr',this)">Fiverr</div>
+        <div class="exp-tab" onclick="showExp('websolute',this)">WebSolute</div>
+      </div>
+      <div>
+        <div class="exp-panel active" id="exp-xavor">
+          <div class="exp-company">Xavor, Lahore</div>
+          <div class="exp-role">Junior Salesforce Administrator</div>
+          <div class="exp-period">Oct 2025 – Jan 2026 · Onsite</div>
+          <ul class="exp-bullets">
+            <li>Implemented Salesforce automation using Flow Builder and Apex Triggers</li>
+            <li>Built Lightning Web Components to enhance UI and user experience</li>
+            <li>Managed roles, profiles, permission sets, and security configurations</li>
+            <li>Created summary and matrix reports with dashboards for KPI tracking</li>
+            <li>Assisted with data migration and deduplication using Data Loader</li>
+            <li>Configured custom objects, record types, page layouts, and Lightning App Builder</li>
+            <li>Set up OWD, sharing rules, and field-level security for data access control</li>
+          </ul>
+        </div>
+        <div class="exp-panel" id="exp-nawlabs">
+          <div class="exp-company">NawLabs · Remote</div>
+          <div class="exp-role">Salesforce Administrator Intern</div>
+          <div class="exp-period">Jun 2025 – Sep 2025 · Remote</div>
+          <ul class="exp-bullets">
+            <li>Supported daily admin tasks including user management and object configuration</li>
+            <li>Created automation flows and custom dashboards for business insight reporting</li>
+            <li>Assisted in data migration and Lightning App Builder customization</li>
+            <li>Wrote basic Apex classes and SOQL queries for data processing requirements</li>
+          </ul>
+        </div>
+        <div class="exp-panel" id="exp-fiverr">
+          <div class="exp-company">Fiverr · Global Clients</div>
+          <div class="exp-role">Salesforce Freelancer</div>
+          <div class="exp-period">Dec 2023 – Present · Remote</div>
+          <ul class="exp-bullets">
+            <li>Delivered end-to-end Salesforce solutions: automation, security, and customization</li>
+            <li>Developed Apex classes and triggers for business logic and data validation</li>
+            <li>Built LWC components and integrated third-party services via REST API</li>
+            <li>Performed data migration, system optimization, and org health maintenance</li>
+          </ul>
+        </div>
+        <div class="exp-panel" id="exp-websolute">
+          <div class="exp-company">WebSolute IT Solution</div>
+          <div class="exp-role">Web Developer</div>
+          <div class="exp-period">Sept 2021 – Jan 2022 · Onsite</div>
+          <ul class="exp-bullets">
+            <li>Developed responsive and dynamic websites using HTML5, CSS3, and JavaScript</li>
+            <li>Maintained and updated front-end systems ensuring cross-browser compatibility</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-label">What I offer</div>
+    <h2 class="section-title">Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">⚙️</div>
+        <h3>Salesforce Administration</h3>
+        <p>Complete org setup and management — users, roles, profiles, permission sets, OWD, sharing rules, and field-level security.</p>
+        <div class="service-tags">
+          <span class="tag">Sales Cloud</span>
+          <span class="tag">Service Cloud</span>
+          <span class="tag">Reports</span>
+          <span class="tag">Dashboards</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔄</div>
+        <h3>Flow & Automation</h3>
+        <p>Build powerful automated workflows using Flow Builder, Process Builder, and Workflow Rules to streamline your business processes.</p>
+        <div class="service-tags">
+          <span class="tag">Flow Builder</span>
+          <span class="tag">Triggers</span>
+          <span class="tag">Approvals</span>
+          <span class="tag">Alerts</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>Apex Development</h3>
+        <p>Custom business logic through Apex classes, triggers, Batch Apex, and test classes following Salesforce best practices.</p>
+        <div class="service-tags">
+          <span class="tag">Apex</span>
+          <span class="tag">SOQL/SOSL</span>
+          <span class="tag">Batch Jobs</span>
+          <span class="tag">Test Coverage</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🖥️</div>
+        <h3>LWC / Aura Components</h3>
+        <p>Modern Lightning Web Components and Aura components for a polished, professional Salesforce Lightning Experience.</p>
+        <div class="service-tags">
+          <span class="tag">LWC</span>
+          <span class="tag">Wire Service</span>
+          <span class="tag">Events</span>
+          <span class="tag">Lightning App</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔗</div>
+        <h3>Integrations</h3>
+        <p>Connect Salesforce with third-party systems using REST APIs, HTTP Callouts, and Named Credentials.</p>
+        <div class="service-tags">
+          <span class="tag">REST API</span>
+          <span class="tag">HTTP Callouts</span>
+          <span class="tag">Named Credentials</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <h3>Frontend Development</h3>
+        <p>Responsive, pixel-perfect websites built with modern HTML5, CSS3, and JavaScript (ES6+) for any device.</p>
+        <div class="service-tags">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Responsive</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">Portfolio</div>
+    <h2 class="section-title">Featured projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-type">Salesforce</div>
+        <h3>Hospital Billing System</h3>
+        <p>Custom data model with automated billing workflows, validation rules, formula fields, and a full reporting suite for hospital management.</p>
+        <div class="service-tags">
+          <span class="tag">Custom Objects</span>
+          <span class="tag">Flow Automation</span>
+          <span class="tag">Reports</span>
+          <span class="tag">Dashboards</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-type">Salesforce</div>
+        <h3>Student Management System</h3>
+        <p>Academic record management with object architecture, security configuration via Profiles & Permissions, and basic Flow automation.</p>
+        <div class="service-tags">
+          <span class="tag">Object Design</span>
+          <span class="tag">Profiles</span>
+          <span class="tag">Permissions</span>
+          <span class="tag">Flow</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-type">Web Development</div>
+        <h3>E-Commerce Platform</h3>
+        <p>Fully functional e-commerce site with product listings, shopping cart, checkout, and PHP/SQL backend for user authentication and order management.</p>
+        <div class="service-tags">
+          <span class="tag">HTML5/CSS3</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">PHP</span>
+          <span class="tag">SQL</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-type">Freelance · Fiverr</div>
+        <h3>Client CRM Solutions</h3>
+        <p>30+ end-to-end Salesforce projects delivered to international clients — covering org setup, automations, LWC development, and integrations.</p>
+        <div class="service-tags">
+          <span class="tag">Multi-client</span>
+          <span class="tag">Apex</span>
+          <span class="tag">LWC</span>
+          <span class="tag">REST API</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="section-label">Let's talk</div>
+        <h2>Ready to work together?</h2>
+        <p>Whether you need a Salesforce Administrator, a developer to build LWC components, or a frontend developer — I'm available for freelance and full-time opportunities.</p>
+        <div class="contact-links">
+          <div class="contact-link">
+            <div class="contact-link-icon phone">📞</div>
+            <div>
+              <div class="contact-link-text">Phone</div>
+              <div class="contact-link-val">+92 343 9050858</div>
+            </div>
+          </div>
+          <div class="contact-link">
+            <div class="contact-link-icon email">✉️</div>
+            <div>
+              <div class="contact-link-text">Email</div>
+              <div class="contact-link-val">rauf01463@gmail.com</div>
+            </div>
+          </div>
+          <div class="contact-link">
+            <div class="contact-link-icon loc">📍</div>
+            <div>
+              <div class="contact-link-text">Location</div>
+              <div class="contact-link-val">Islamabad, Pakistan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form onsubmit="handleForm(event)">
+        <input type="text" placeholder="Your name" required/>
+        <input type="email" placeholder="Your email" required/>
+        <input type="text" placeholder="Subject"/>
+        <textarea placeholder="Tell me about your project..."></textarea>
+        <button type="submit">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>Abdur Rauf</span> · Salesforce Developer & Frontend Developer · Islamabad, Pakistan</p>
+</footer>
+
+<script>
+function showExp(id, tab) {
+  document.querySelectorAll('.exp-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.exp-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('exp-' + id).classList.add('active');
+  tab.classList.add('active');
+}
+function handleForm(e) {
+  e.preventDefault();
+  e.target.querySelector('button').textContent = 'Message sent! ✓';
+  e.target.querySelector('button').style.background = '#06d6a0';
+  setTimeout(() => {
+    e.target.querySelector('button').textContent = 'Send Message →';
+    e.target.querySelector('button').style.background = '';
+    e.target.reset();
+  }, 3000);
+}
+</script>
+</body>
+</html>
